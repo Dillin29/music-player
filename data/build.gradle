@@ -1,0 +1,88 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: "de.mannodermaus.android-junit5"
+
+android {
+    namespace 'com.github.anrimian.musicplayer.data'
+
+    def config = rootProject.ext
+
+    compileSdkVersion = config.androidCompileSdkVersion
+    buildToolsVersion = config.androidBuildToolsVersion
+
+    defaultConfig {
+        minSdkVersion config.androidMinSdkVersion
+        targetSdkVersion config.androidTargetSdkVersion
+
+        testInstrumentationRunner config.testInstrumentationRunner
+        testInstrumentationRunnerArguments["runnerBuilder"] = config.testJunit5Builder
+
+        compileOptions {
+            sourceCompatibility JavaVersion.VERSION_11
+            targetCompatibility JavaVersion.VERSION_11
+        }
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }
+        sourceSets {
+            androidTest.assets.srcDirs += files("$projectDir/schemas".toString())
+        }
+    }
+
+    buildTypes {
+        QA {
+            initWith release
+        }
+    }
+
+    testOptions {
+        unitTests.returnDefaultValues = true
+    }
+    packagingOptions {
+        resources {
+            excludes += [
+                    'META-INF/*',
+            ]
+        }
+    }
+}
+
+dependencies {
+    implementation project(':domain')
+
+    implementation kotlinStdLib
+
+    implementation appCompat
+    implementation documentFile
+    implementation rxJava
+    implementation exoPlayerCore
+
+    compileOnly javaxAnnotation
+    compileOnly javaxGeneratedAnnotation
+
+    implementation room
+    implementation roomRx
+    kapt roomCompiler
+
+    implementation jAudioTagger
+
+    testImplementation junit5
+    testImplementation junit5Params
+    testRuntimeOnly junit5Engine
+    testImplementation mockito
+    testImplementation mockitoKt
+
+    androidTestImplementation androidXTestRunner
+    androidTestImplementation junit5
+    androidTestImplementation junit5PluginCore
+    androidTestRuntimeOnly junit5PluginRunner
+    androidTestImplementation espresso
+    androidTestImplementation androidXTestRules
+    androidTestImplementation rxJavaExt
+    androidTestImplementation roomTest
+
+}

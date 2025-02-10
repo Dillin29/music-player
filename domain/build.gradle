@@ -1,0 +1,22 @@
+apply plugin: 'kotlin'
+
+java {
+    sourceCompatibility = JavaVersion.VERSION_11
+    targetCompatibility = JavaVersion.VERSION_11
+}
+
+dependencies {
+    implementation project(':libs:filesync:core')
+
+    implementation rxJava
+
+    compileOnly javaxAnnotation
+
+    testImplementation junit5
+    testImplementation junit5Params
+    testRuntimeOnly junit5Engine
+    test.useJUnitPlatform()
+    testImplementation mockito
+    testImplementation mockitoKt
+}
+

@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/menu_search"
+        android:title="@string/search"
+        android:icon="@drawable/ic_magnify"
+        app:showAsAction="ifRoom"/>
+
+    <item android:id="@+id/menu_change_play_list_name"
+        android:title="@string/edit_name"
+        android:icon="@drawable/ic_playlist_edit"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/menu_export_playlist"
+        android:title="@string/export_playlist"
+        android:icon="@drawable/ic_save"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/menu_sleep_timer"
+        android:icon="@drawable/ic_timer"
+        android:title="@string/sleep_timer"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/menu_equalizer"
+        android:title="@string/equalizer"
+        android:icon="@drawable/ic_equalizer"
+        app:showAsAction="never"/>
+
+    <item android:id="@+id/menu_delete_play_list"
+        android:title="@string/delete_playlist"
+        android:icon="@drawable/ic_delete_outline"
+        app:showAsAction="never"/>
+
+</menu>

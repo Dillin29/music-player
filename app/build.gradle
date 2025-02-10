@@ -1,0 +1,112 @@
+apply plugin: 'com.android.library'
+apply plugin: 'kotlin-android'
+apply plugin: 'kotlin-kapt'
+apply plugin: "de.mannodermaus.android-junit5"
+
+android {
+    namespace 'com.github.anrimian.musicplayer'
+
+    def config = rootProject.ext
+
+    compileSdkVersion = config.androidCompileSdkVersion
+    buildToolsVersion = config.androidBuildToolsVersion
+    defaultConfig {
+        minSdkVersion config.androidMinSdkVersion
+        targetSdkVersion config.androidTargetSdkVersion
+
+        testInstrumentationRunner config.testInstrumentationRunner
+        testInstrumentationRunnerArguments["runnerBuilder"] = config.testJunit5Builder
+
+        vectorDrawables.useSupportLibrary = true
+        resConfigs 'en', 'be', 'cs', 'de', 'el', 'es', 'fr', 'in', 'pt', 'ru', 'tr', 'uk'
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            consumerProguardFiles 'proguard-rules.pro'
+        }
+        QA {
+            initWith release
+        }
+        debug {
+            minifyEnabled false
+        }
+    }
+    lintOptions {
+        abortOnError false
+    }
+    buildFeatures {
+        viewBinding true
+    }
+    compileOptions {
+        sourceCompatibility JavaVersion.VERSION_11
+        targetCompatibility JavaVersion.VERSION_11
+    }
+    packagingOptions {
+        jniLibs {
+            excludes += ['**/kotlin/**']
+        }
+        resources {
+            excludes += [
+                    '/META-INF/*.kotlin_module',
+                    '**/kotlin/**',
+                    '**/*.txt',
+                    '**/*.xml',
+                    '/*.properties'
+            ]
+        }
+    }
+}
+
+
+dependencies {
+    implementation project(':domain')
+    implementation project(':data')
+
+    implementation project(':libs:filesync:core')
+
+    implementation kotlinStdLib
+
+    implementation appCompat
+    implementation appCompatResources
+    implementation material
+    implementation recyclerView
+    implementation constraintLayout
+    implementation supportMedia
+
+    implementation rxAndroid
+
+    implementation moxy
+    implementation moxyAppcompat
+    implementation moxyMaterial
+    implementation moxyKtx
+    kapt moxyCompiler
+
+    implementation dagger
+    kapt daggerCompiler
+
+    implementation room
+    kapt roomCompiler
+
+    implementation glide
+    kapt glideCompiler
+
+    implementation slidr
+
+    implementation chipsLayoutManager
+
+    implementation rotateLayout
+
+    compileOnly javaxAnnotation
+    compileOnly javaxGeneratedAnnotation
+
+    testImplementation junit5
+    testImplementation junit5Params
+    testRuntimeOnly junit5Engine
+    testImplementation mockito
+
+    androidTestImplementation androidXTestRunner
+    androidTestImplementation junit5PluginCore
+    androidTestRuntimeOnly junit5PluginRunner
+    androidTestImplementation espresso
+}

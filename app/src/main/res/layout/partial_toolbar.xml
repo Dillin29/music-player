@@ -1,0 +1,179 @@
+<?xml version="1.0" encoding="utf-8"?>
+<merge
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:layout_width="match_parent"
+    tools:layout_height="?attr/actionBarSize"
+    tools:background="?attr/colorPrimary"
+    tools:theme="@style/ToolbarStyle"
+    tools:parentTag="android.widget.FrameLayout">
+
+    <LinearLayout
+        android:id="@+id/toolbarInternal"
+        android:layout_width="match_parent"
+        android:layout_height="?attr/actionBarSize">
+
+        <FrameLayout
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent">
+
+            <ImageView
+                android:id="@+id/ivNavigation"
+                android:layout_width="48dp"
+                android:layout_height="match_parent"
+                android:scaleType="centerInside"
+                android:contentDescription="@string/open_drawer"
+                android:background="?actionBarItemBackground"
+                android:layout_marginStart="@dimen/toolbar_nav_icon_margin_start"
+                android:layout_marginEnd="20dp"
+                tools:src="@drawable/ic_back"/>
+
+            <com.google.android.material.imageview.ShapeableImageView
+                android:id="@+id/ivNavHint"
+                style="@style/BaseShapeableImageStyle"
+                android:layout_width="12dp"
+                android:layout_height="12dp"
+                android:background="?colorPrimary"
+                android:layout_marginStart="@dimen/toolbar_nav_icon_margin_start"
+                android:translationX="28dp"
+                android:translationY="12dp"
+                app:tint="?attr/toolbarTextColorPrimary"
+                app:shapeAppearance="@style/ShapeAppearance.CircleImageView"
+                tools:src="@drawable/ic_repeat" />
+
+        </FrameLayout>
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clTitleContainer"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize">
+
+            <TextView
+                android:id="@+id/tvTitle"
+                style="@style/ToolbarTitleStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintBottom_toTopOf="@id/tvSubtitle"
+                app:layout_constraintEnd_toStartOf="@id/acvMain"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constrainedWidth="true"
+                tools:text="ffhjgffhjgffhjgffhjgfkssfffkssfffkssfffkssff"/>
+
+            <TextView
+                android:id="@+id/tvSubtitle"
+                style="@style/ToolbarSubtitleStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:importantForAccessibility="no"
+                app:layout_constraintTop_toBottomOf="@id/tvTitle"
+                app:layout_constraintStart_toStartOf="@id/tvTitle"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/acvMain"
+                app:layout_constrainedWidth="true"
+                app:layout_constraintHorizontal_bias="0.0"
+                tools:text="dfffhjgfkssffffhjgfkssffffhjgfkssffflkfssffd"/>
+
+            <androidx.constraintlayout.widget.Barrier
+                android:id="@+id/barrierTitles"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                app:barrierDirection="end"
+                app:constraint_referenced_ids="tvTitle, tvSubtitle"/>
+
+            <ImageView
+                android:id="@+id/ivActionIcon"
+                android:layout_width="@dimen/toolbar_title_menu_button_size"
+                android:layout_height="@dimen/toolbar_title_menu_button_size"
+                android:src="@drawable/ic_arrow_drop_down"
+                android:scaleType="center"
+                android:contentDescription="@null"
+                app:tint="?attr/toolbarTextColorPrimary"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/acvMain"
+                app:layout_constraintHorizontal_bias="0.0"
+                app:layout_constraintStart_toStartOf="@id/barrierTitles"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_bias="0.6"/>
+
+            <FrameLayout
+                android:id="@+id/flTitleArea"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                android:background="?selectableItemBackgroundBorderless"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="@id/ivActionIcon"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent" />
+
+            <androidx.appcompat.widget.ActionMenuView
+                android:id="@+id/acvMain"
+                android:theme="@style/ActionMenuViewStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginEnd="@dimen/toolbar_control_offset_2"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"
+                tools:layout_width="100dp" />
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/flToolbarModes"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_marginStart="@dimen/toolbar_content_start">
+
+        <EditText
+            android:theme="@style/EditTextStyle.Toolbar"
+            android:id="@+id/etSearch"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:hint="@string/search"
+            android:layout_marginEnd="16dp"
+            android:inputType="text"
+            android:imeOptions="actionSearch|flagNoExtractUi"
+            android:importantForAutofill="no"
+            android:background="@android:color/transparent"
+            android:textColor="@color/color_text_toolbar_primary"
+            android:textColorHint="@color/color_text_secondary_inverse"
+            android:maxLines="1"
+            tools:ignore="UnusedAttribute" />
+
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/clSelectionMode"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <TextView
+                android:id="@+id/tvSelectionCount"
+                style="@style/ToolbarTitleStyle.Selection"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@id/acvSelection"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="23" />
+
+            <androidx.appcompat.widget.ActionMenuView
+                android:id="@+id/acvSelection"
+                android:theme="@style/SelectionActionMenuViewStyle"
+                android:layout_width="wrap_content"
+                android:layout_height="0dp"
+                android:layout_marginEnd="@dimen/toolbar_control_offset"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toEndOf="parent"/>
+
+        </androidx.constraintlayout.widget.ConstraintLayout>
+
+    </FrameLayout>
+
+</merge>
